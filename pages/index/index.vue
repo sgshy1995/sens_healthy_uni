@@ -16,14 +16,17 @@
 			</view>
 		</u-navbar>
 		<PainQA v-show="current === 0"></PainQA>
+		<RehabilitationInformation v-show="current === 1"></RehabilitationInformation>
 	</scroll-view>
 </template>
 
 <script>
 	import PainQA from '@/pages_index/painQA.vue'
+	import RehabilitationInformation from '@/pages_index/rehabilitationInformation.vue'
 	export default {
 		components: {
-			PainQA
+			PainQA,
+			RehabilitationInformation
 		},
 		data() {
 			return {

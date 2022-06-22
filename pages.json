@@ -46,6 +46,15 @@
             }
             
         }
+        ,{
+            "path" : "pages_index/informationDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationStyle":"custom",

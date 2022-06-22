@@ -1,5 +1,5 @@
 <template>
-	<view scroll-y class="pain-q-a">
+	<view class="pain-q-a">
 		<view class="pain-q-a-item" v-for="(u,index) in dataSource" :key="u.id">
 			<view class="pain-q-a-item-top">
 				问题描述 ({{ u.question_type }})
