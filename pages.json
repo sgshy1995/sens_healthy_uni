@@ -28,7 +28,25 @@
 				"enablePullDownRefresh": false
 			}
 		}
-	],
+        ,{
+            "path" : "pages_index/painQADetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages_index/painQAPublish",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationStyle":"custom",
 		"app-plus":{
@@ -58,6 +76,7 @@
 		"iconWidth": "22px",
 		"fontSize": "12px",
 		"spacing": "6px",
+		"blurEffect": "extralight",
 		"list": [
 			{
 				"text": "首页",

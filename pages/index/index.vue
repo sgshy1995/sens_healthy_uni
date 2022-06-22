@@ -9,18 +9,22 @@
 					<image class="msg-icon" src="../../static/images/home/消息.png"></image>
 					<text>消息</text>
 				</view>
-				<view class="right-item">
+				<view class="right-item" @click="handleShowPublish">
 					<image class="add-icon" src="../../static/images/home/发布.png"></image>
 					<text>发布</text>
 				</view>
 			</view>
 		</u-navbar>
-		
+		<PainQA v-show="current === 0"></PainQA>
 	</scroll-view>
 </template>
 
 <script>
+	import PainQA from '@/pages_index/painQA.vue'
 	export default {
+		components: {
+			PainQA
+		},
 		data() {
 			return {
 				itemStyle: {
@@ -51,6 +55,12 @@
 			changeTabs(info){
 				console.log('info', info)
 				this.current = info.index
+			},
+			handleShowPublish() {
+				const that = this
+				uni.navigateTo({
+					url: "/pages_index/painQAPublish"
+				})
 			}
 		}
 	}
@@ -62,7 +72,6 @@
 		height: 100vh;
 		box-sizing: border-box;
 		position: relative;
-		padding-top: 24rpx;
 		
 		.right{
 			display: flex;

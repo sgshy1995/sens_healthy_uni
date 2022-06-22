@@ -2,7 +2,7 @@
 	<view class="uni-section">
 		<view class="uni-section-header" nvue>
 			<view v-if="type" class="uni-section__head">
-				<view :class="type" class="uni-section__head-tag"/>
+				<view :class="type" :style="{backgroundColor: `${lineColor} !important`}" class="uni-section__head-tag"/>
 			</view>
 			<view class="uni-section__content">
 				<text :class="{'distraction':!subTitle}" :style="{color:color}" class="uni-section__content-title">{{ title }}</text>
@@ -50,6 +50,10 @@
 			padding: {
 				type: Boolean,
 				default: false
+			},
+			lineColor: {
+				type: String,
+				default: '#2979ff'
 			}
 		},
 		data() {
