@@ -55,6 +55,15 @@
             }
             
         }
+        ,{
+            "path" : "pages_index/noticePage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationStyle":"custom",

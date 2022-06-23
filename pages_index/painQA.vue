@@ -149,14 +149,14 @@
 		box-sizing: border-box;
 		padding: 24rpx;
 		margin-top: 24rpx;
-		padding-bottom: 100rpx;
+		padding-bottom: 160rpx;
 		position: relative;
 
 		.pain-q-a-item {
 			width: 100%;
 			margin-bottom: 24rpx;
 			box-sizing: border-box;
-			border: 1px solid #ccc;
+			border: 1px solid #eee;
 			border-radius: 10rpx;
 			padding: 24rpx;
 

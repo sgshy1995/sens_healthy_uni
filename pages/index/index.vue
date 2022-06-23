@@ -5,9 +5,12 @@
 				<u-tabs :current="current" @change="changeTabs" :list="listTitle" :itemStyle="itemStyle" lineColor="#4F68B0"></u-tabs>
 			</view>
 			<view slot="right" class="right">
-				<view class="right-item">
+				<view class="right-item" @click="handleShowNotice">
 					<image class="msg-icon" src="../../static/images/home/消息.png"></image>
 					<text>消息</text>
+					<view class="badge-box" :class="{'less99': message <= 99 && message >= 10, 'less10': message <10}" v-if="message">
+						<u-badge numberType="overflow" type="error" max="99" :value="message"></u-badge>
+					</view>
 				</view>
 				<view class="right-item" @click="handleShowPublish">
 					<image class="add-icon" src="../../static/images/home/发布.png"></image>
@@ -48,7 +51,8 @@
 				],
 				menuBaseUrl: 'https://cdn.uviewui.com/uview/menu/',
 				title: 'Hello',
-				current: 0
+				current: 0,
+				message: 998
 			}
 		},
 		methods: {
@@ -64,7 +68,13 @@
 				uni.navigateTo({
 					url: "/pages_index/painQAPublish"
 				})
-			}
+			},
+			handleShowNotice() {
+				const that = this
+				uni.navigateTo({
+					url: "/pages_index/noticePage"
+				})
+			},
 		}
 	}
 </script>
@@ -83,12 +93,27 @@
 		
 		.right-item{
 			flex-shrink: 0;
-			margin-left: 30rpx;
+			margin-left: 40rpx;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			font-size: 10px;
 			flex-direction: column;
+			position: relative;
+			
+			.badge-box{
+				position: absolute;
+				right: -36rpx;
+				top: -12rpx;
+				
+				&.less99{
+					right: -24rpx;
+				}
+				
+				&.less10{
+					right: -12rpx;
+				}
+			}
 		}
 		
 		.msg-icon{
