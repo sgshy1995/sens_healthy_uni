@@ -26,7 +26,7 @@
 				</view>
 			</slot>
 		</view>
-		<view class="uni-data-tree-cover" v-if="isOpened" @click="handleClose"></view>
+		<view class="uni-data-tree-cover" v-if="isOpened" @click="handleOverlayClose"></view>
 		<view class="uni-data-tree-dialog" v-if="isOpened">
 			<view class="uni-popper__arrow"></view>
 			<view class="dialog-caption">
@@ -38,7 +38,7 @@
 					<view class="dialog-close-plus dialog-close-rotate" data-id="close"></view>
 				</view>
 			</view>
-			<data-picker-view class="picker-view" ref="pickerView" v-model="dataValue" :localdata="localdata"
+			<data-picker-view class="picker-view" ref="pickerView" v-model="dataValue" :localdata="localdata" :itemsList="itemsList"
 				:preload="preload" :collection="collection" :field="field" :orderby="orderby" :where="where"
 				:step-searh="stepSearh" :self-field="selfField" :parent-field="parentField" :managed-mode="true"
 				:map="map" :ellipsis="ellipsis" @change="onchange" @datachange="ondatachange" @nodeclick="onnodeclick">
@@ -82,6 +82,16 @@
 			DataPickerView
 		},
 		props: {
+			overlayClose: {
+				type: Boolean,
+				default: true
+			},
+			itemsList: {
+				type: Array,
+				default: ()=>{
+					return []
+				}
+			},
 			options: {
 				type: [Object, Array],
 				default () {
@@ -203,6 +213,11 @@
 			},
 			handleClose(e) {
 				this.hide()
+			},
+			handleOverlayClose(){
+				if(this.overlayClose){
+					this.hide()
+				}
 			},
 			onnodeclick(e) {
 				this.$emit('nodeclick', e)
@@ -399,7 +414,7 @@
 		display: flex;
 		/* #endif */
 		flex-direction: column;
-		z-index: 100;
+		z-index: 1000;
 	}
 
 	.uni-data-tree-dialog {
@@ -415,7 +430,7 @@
 		display: flex;
 		/* #endif */
 		flex-direction: column;
-		z-index: 102;
+		z-index: 1002;
 		overflow: hidden;
 		/* #ifdef APP-NVUE */
 		width: 750rpx;

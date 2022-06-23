@@ -6,7 +6,7 @@
 					<view class="selected-item"
 						:class="{'selected-item-active':index==selectedIndex, 'selected-item-text-overflow': ellipsis}"
 						:key="index" v-if="item.text" @click="handleSelect(index)">
-						<text class="">{{item.text}}</text>
+						<text class="">{{itemsList[index]}}</text>
 					</view>
 				</template>
 			</view>
@@ -62,6 +62,12 @@
 			ellipsis: {
 				type: Boolean,
 				default: true
+			},
+			itemsList: {
+				type: Array,
+				default: ()=>{
+					return []
+				}
 			}
 		},
 		data() {
