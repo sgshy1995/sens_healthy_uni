@@ -1,5 +1,5 @@
 <template>
-	<view class="rehabilitation-information">
+	<scroll-view scroll-y class="rehabilitation-information">
 		<view class="rehabilitation-information-fire">
 			<view class="rehabilitation-information-fire-title">热门资讯</view>
 			<u-swiper :list="listSwiper" previousMargin="30" nextMargin="30" showTitle circular autoplay radius="5">
@@ -27,10 +27,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="no-more">
-			没有更多了 ~
-		</view>
-	</view>
+	</scroll-view>
 </template>
 
 <script>
@@ -112,11 +109,10 @@
 <style lang="scss">
 	.rehabilitation-information {
 		width: 100%;
-		min-height: calc(100% - 292rpx);
 		box-sizing: border-box;
 		padding: 0 24rpx 24rpx 24rpx;
 		margin-top: 24rpx;
-		padding-bottom: 148rpx;
+		padding-bottom: 154rpx;
 		position: relative;
 		
 		.rehabilitation-information-fire{

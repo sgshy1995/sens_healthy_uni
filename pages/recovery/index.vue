@@ -1,18 +1,21 @@
 <template>
-	<scroll-view @scroll="handleScroll" :scroll-y="!visible" class="index-wrapper" :class="{hiden: visible}">
-		<u-navbar placeholder title="" leftIconSize="28" border bgColor="#fff">
-			<view slot="left"></view>
-			<view slot="center">
-				<u-tabs :current="current" @change="changeTabs" :list="listTitle" :itemStyle="itemStyle" lineColor="#4F68B0"></u-tabs>
-			</view>
-			<view slot="right" class="right">
-				<view class="right-item" @click="handleShowTips">
-					<image class="add-icon" src="@/static/images/recovery/tips.png"></image>
+	<view class="index-wrapper-outer">
+		<view class="index-wrapper" :class="{hiden: visible}">
+			<u-navbar placeholder title="" leftIconSize="28" border bgColor="#fff">
+				<view slot="left"></view>
+				<view slot="center">
+					<u-tabs :current="current" @change="changeTabs" :list="listTitle" :itemStyle="itemStyle" lineColor="#4F68B0"></u-tabs>
 				</view>
-			</view>
-		</u-navbar>
-		<Prescription :ifSticky="ifSticky" @hide="handleHidePrescription" @show="handleShowPrescription" v-show="current === 0"></Prescription>
-	</scroll-view>
+				<view slot="right" class="right">
+					<view class="right-item" @click="handleShowTips">
+						<image class="add-icon" src="@/static/images/recovery/tips.png"></image>
+					</view>
+				</view>
+			</u-navbar>
+			<Prescription :ifSticky="ifSticky" @hide="handleHidePrescription" @show="handleShowPrescription" v-show="current === 0"></Prescription>
+		</view>
+	</view>
+	
 </template>
 
 <script>
@@ -48,9 +51,6 @@
 			}
 		},
 		methods: {
-			handleScroll(event){
-				this.ifSticky = event.detail.scrollTop >= 14
-			},
 			showCamera(){
 				
 			},
@@ -71,21 +71,25 @@
 			handleHidePrescription(){
 				console.log('关闭弹窗')
 				this.visible = false
-			}
+			},
+			onPageScroll(res) {
+				this.ifSticky = res.scrollTop >= 14
+			},
 		}
 	}
 </script>
 
 <style lang="scss">
-	.index-wrapper {
+	.index-wrapper-outer{
 		width: 100vw;
 		height: 100vh;
+	}
+	
+	.index-wrapper {
+		width: 100%;
+		height: 100%;
 		box-sizing: border-box;
 		position: relative;
-		
-		&.hiden{
-			overflow: hidden !important;
-		}
 		
 		.right{
 			display: flex;

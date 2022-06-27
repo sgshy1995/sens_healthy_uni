@@ -1,26 +1,26 @@
 <template>
-	<scroll-view scroll-y class="index-wrapper">
+	<view class="index-wrapper">
 		<u-navbar placeholder title="" leftIconSize="28" border bgColor="#fff" @leftClick="showCamera" leftIcon="camera">
 			<view slot="center">
 				<u-tabs :current="current" @change="changeTabs" :list="listTitle" :itemStyle="itemStyle" lineColor="#4F68B0"></u-tabs>
 			</view>
 			<view slot="right" class="right">
 				<view class="right-item" @click="handleShowNotice">
-					<image class="msg-icon" src="../../static/images/home/消息.png"></image>
+					<image class="msg-icon" src="../../static/images/home/message.png"></image>
 					<text>消息</text>
 					<view class="badge-box" :class="{'less99': message <= 99 && message >= 10, 'less10': message <10}" v-if="message">
 						<u-badge numberType="overflow" type="error" max="99" :value="message"></u-badge>
 					</view>
 				</view>
 				<view class="right-item" @click="handleShowPublish">
-					<image class="add-icon" src="../../static/images/home/发布.png"></image>
+					<image class="add-icon" src="../../static/images/home/publish.png"></image>
 					<text>发布</text>
 				</view>
 			</view>
 		</u-navbar>
 		<PainQA v-show="current === 0"></PainQA>
 		<RehabilitationInformation v-show="current === 1"></RehabilitationInformation>
-	</scroll-view>
+	</view>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-	<view class="pain-q-a">
+	<scroll-view scroll-y class="pain-q-a">
 		<view class="pain-q-a-item" v-for="(u,index) in dataSource" :key="u.id">
 			<view class="pain-q-a-item-top">
 				问题描述 ({{ u.question_type }})
@@ -32,10 +32,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="no-more">
-			没有更多了 ~
-		</view>
-	</view>
+	</scroll-view>
 </template>
 
 <script>
@@ -145,11 +142,10 @@
 	.pain-q-a {
 		width: 100%;
 		background: #fff;
-		min-height: calc(100% - 292rpx);
 		box-sizing: border-box;
 		padding: 24rpx;
 		margin-top: 24rpx;
-		padding-bottom: 160rpx;
+		padding-bottom: 170rpx;
 		position: relative;
 
 		.pain-q-a-item {

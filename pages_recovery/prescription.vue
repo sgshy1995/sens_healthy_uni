@@ -1,7 +1,8 @@
 <template>
 	<view class="prescription-wrapper">
-		<u-sticky customNavHeight="170rpx" bgColor="#fff">
+		<u-sticky :customNavHeight="`${barHeight}rpx`" bgColor="#fff">
 			<view class="prescription-top" :class="{sticky: ifSticky}">
+				<view style="position: fixed;"></view>
 				<u-tabs v-if="!classes" :list="classifyList" lineWidth="20" lineColor="#303133" :activeStyle="{
 				            color: '#303133',
 				            fontWeight: 'bold',
@@ -10,13 +11,14 @@
 				            color: '#606266',
 				            transform: 'scale(1)'
 				        }" itemStyle="padding-left: 15px; padding-right: 15px; height: 34px;">
-					<view class="prescription-top-classify" slot="right" @tap="handleShowSelect">
+					<view class="prescription-top-classify" @tap="handleShowSelect" slot="right">
 						<image class="prescription-top-classify-logo" src="@/static/images/recovery/classify.png">
 						</image>
 						<text class="prescription-top-classify-text">所有分类</text>
 					</view>
 				</u-tabs>
-				<view class="ready-select" v-else>
+
+				<view class="ready-select" v-if="classes">
 					<view class="ready-select-inner" @click="handleShowSelect">
 						<view class="inner-left">
 							<text class="ready-select-inner-tip">已选择：</text>
@@ -29,24 +31,29 @@
 					</view>
 				</view>
 			</view>
-			
+
 		</u-sticky>
-		
-		<view class="prescription-bottom">
-			<view class="prescription-bottom-item" v-for="(u,index) in prescriptionList" :key="u.id">
-				<view class="prescription-bottom-item-inner">
-					<image class="item-inner-back" :src="u.cover"></image>
-					<view class="item-inner-title">{{ u.title }}</view>
-					<view class="item-inner-info">
-						<text class="item-inner-info-difficulty">难度：{{ u.difficulty }}</text>
-						<text class="item-inner-info-duration">{{ u.duration }}</text>
+
+		<scroll-view scroll-anchoring enable-back-to-top :show-scrollbar="false" scroll-y
+			class="prescription-bottom-wrapper">
+			<view class="prescription-bottom">
+				<view class="prescription-bottom-item" v-for="(u,index) in prescriptionList" :key="u.id">
+					<view class="prescription-bottom-item-inner">
+						<image class="item-inner-back" :src="u.cover"></image>
+						<view class="item-inner-title">{{ u.title }}</view>
+						<view class="item-inner-info">
+							<text class="item-inner-info-difficulty">难度：{{ u.difficulty }}</text>
+							<text class="item-inner-info-duration">{{ u.duration }}</text>
+						</view>
 					</view>
 				</view>
 			</view>
-		</view>
+		</scroll-view>
+
 		<view class="data-picker-wrapper">
-			<uni-data-picker :key="refreshKey" :itemsList="itemsList" ref="picker" placeholder="请选择班级" preload popup-title="请选择分类" :localdata="dataTree" v-model="classes"
-				@change="onchange" @nodeclick="onnodeclick" @popupopened="onpopupopened" @popupclosed="onpopupclosed">
+			<uni-data-picker :key="refreshKey" :itemsList="itemsList" ref="picker" placeholder="请选择班级" preload
+				popup-title="请选择分类" :localdata="dataTree" v-model="classes" @change="onchange" @nodeclick="onnodeclick"
+				@popupopened="onpopupopened" @popupclosed="onpopupclosed">
 			</uni-data-picker>
 		</view>
 	</view>
@@ -188,6 +195,12 @@
 				default: false
 			}
 		},
+		computed: {
+			barHeight() {
+				console.log('barHeight ===========', this.$store.state.global.barHeight)
+				return this.$store.state.global.barHeight
+			}
+		},
 		methods: {
 			onnodeclick(e) {
 				console.log(e);
@@ -202,13 +215,13 @@
 			},
 			onchange(e) {
 				console.log('onchange:', e);
-				this.selectedInfo = e.detail.value.length ? e.detail.value.map(item=>item.text).join(' / ') : ''
+				this.selectedInfo = e.detail.value.length ? e.detail.value.map(item => item.text).join(' / ') : ''
 			},
-			handleShowSelect(){
+			handleShowSelect() {
 				this.$refs.picker.show()
 				this.$emit('show')
 			},
-			handleClear(){
+			handleClear() {
 				this.$refs.picker.clear()
 				this.refreshKey++
 			}
@@ -222,9 +235,9 @@
 		margin-top: 24rpx;
 		background: #fff;
 		box-sizing: border-box;
-		padding-bottom: 100rpx;
-		
-		.data-picker-wrapper{
+		padding-bottom: 10rpx;
+
+		.data-picker-wrapper {
 			width: 0;
 			height: 0;
 			overflow: hidden;
@@ -238,18 +251,18 @@
 			padding-top: 24rpx;
 			padding-bottom: 12rpx;
 			transition: all 0.3s;
-			
-			&.sticky{
+
+			&.sticky {
 				box-shadow: rgba(0, 0, 0, 0.24) 0 5px 4px -4px;
 			}
-			
-			.ready-select{
+
+			.ready-select {
 				width: 100%;
 				height: 86rpx;
 				box-sizing: border-box;
 				padding: 12rpx 24rpx;
-				
-				.ready-select-inner{
+
+				.ready-select-inner {
 					width: 100%;
 					height: 100%;
 					background: #F2F2F2;
@@ -259,13 +272,13 @@
 					justify-content: space-between;
 					box-sizing: border-box;
 					padding: 0 24rpx;
-					
-					.inner-left{
+
+					.inner-left {
 						display: flex;
 						align-items: center;
 					}
-					
-					.inner-right{
+
+					.inner-right {
 						box-sizing: border-box;
 						font-size: 10px;
 						padding: 3rpx 6rpx;
@@ -275,13 +288,13 @@
 						display: flex;
 						align-items: center;
 					}
-					
-					.ready-select-inner-tip{
+
+					.ready-select-inner-tip {
 						font-size: 12px;
 						color: #777;
 					}
-					
-					.ready-select-inner-text{
+
+					.ready-select-inner-text {
 						font-size: 12px;
 					}
 				}
@@ -289,9 +302,7 @@
 
 
 			.prescription-top-classify {
-				position: absolute;
-				top: 24rpx;
-				right: 0;
+
 				display: flex;
 				align-items: center;
 				background: #fff;
@@ -300,6 +311,9 @@
 				box-shadow: rgba(0, 0, 0, 0.05) -1px 0px 0px, rgba(0, 0, 0, 0.04) -2px 0px 0px, rgba(0, 0, 0, 0.03) -3px 0px 0px, rgba(0, 0, 0, 0.02) -4px 0px 0px, rgba(0, 0, 0, 0.01) -5px 0px 0px;
 				width: 180rpx;
 				justify-content: center;
+				well-change: scroll-position;
+				-webkit-overflow-scrolling: touch;
+				z-index: 999;
 
 
 				.prescription-top-classify-logo {
@@ -312,6 +326,11 @@
 					font-size: 14px;
 				}
 			}
+		}
+
+		.prescription-bottom-wrapper {
+			width: 100%;
+			overflow-anchor: none;
 		}
 
 		.prescription-bottom {

@@ -154,7 +154,11 @@
 				this.close()
 			},
 			showView(url) {
-				
+				// 预览图片
+				uni.previewImage({
+					urls: [url],
+					indicator: 'none'
+				});
 			}
 		}
 	}
