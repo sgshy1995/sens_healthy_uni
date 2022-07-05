@@ -1,8 +1,5 @@
 <template>
 	<scroll-view scroll-y class="pain-q-a">
-		<view class="pain-q-a-top">
-			<u-search placeholder="搜索关键词" :showAction="false" v-model="keyword"></u-search>
-		</view>
 		<view class="pain-q-a-item" v-for="(u,index) in dataSource" :key="u.id">
 			<view class="pain-q-a-item-top">
 				问题描述 ({{ u.question_type }})
@@ -35,9 +32,6 @@
 				</view>
 			</view>
 		</view>
-		<view class="qa-publish" @click="handleShowPublish">
-			<u-icon name="plus" color="#fff" size="18"></u-icon>
-		</view>
 	</scroll-view>
 </template>
 
@@ -46,7 +40,6 @@
 		name: 'PainQA',
 		data() {
 			return {
-				keyword: '',
 				dataSource: [{
 						id: '1',
 						name: '张志东',
@@ -140,58 +133,33 @@
 					    res.eventChannel.emit('show', { record })
 					}
 				})
-			},
-			handleShowPublish() {
-				const that = this
-				uni.navigateTo({
-					url: "/pages_index/painQAPublish"
-				})
-			},
+			}
 		}
 	}
 </script>
 
 <style lang="scss">
-	.qa-publish{
-		position: fixed;
-		right: 12rpx;
-		bottom: 200rpx;
-		width: 80rpx;
-		height: 80rpx;
-		background: #4F68B0;
-		box-shadow: rgba(79,104,176, 0.3) 0px 14px 24px, rgba(79,104,176, 0.22) 0px 9px 8px;
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	
 	.pain-q-a {
 		width: 100%;
-		background: transparent;
+		background: #fff;
 		box-sizing: border-box;
 		padding: 24rpx;
+		margin-top: 24rpx;
 		padding-bottom: 170rpx;
 		position: relative;
-		
-		.pain-q-a-top{
-			margin-bottom: 24rpx;
-		}
 
 		.pain-q-a-item {
 			width: 100%;
 			margin-bottom: 24rpx;
 			box-sizing: border-box;
-			border: 2px solid #eee;
+			border: 1px solid #eee;
 			border-radius: 10rpx;
 			padding: 24rpx;
-			background: #fff;
 
 			.pain-q-a-item-top {
 				margin-bottom: 24rpx;
 				color: #4F68B0;
 				font-size: 14px;
-				font-weight: 700;
 			}
 
 			.pain-q-a-item-info {
@@ -212,10 +180,6 @@
 					height: 100%;
 					flex-direction: column;
 					font-size: 13px;
-					
-					.info-user-name{
-						font-weight: 700;
-					}
 				}
 			}
 
@@ -224,7 +188,7 @@
 				justify-content: space-between;
 				height: 150rpx;
 				width: 100%;
-				margin-top: 24rpx;
+				margin-top: 24px;
 
 				.item-content-left {
 					flex-grow: 1;

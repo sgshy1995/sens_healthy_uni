@@ -8,17 +8,6 @@
 				个人中心
 			</view>
 			<view slot="right" class="right">
-				<view class="right-item" @click="handleShowNotice">
-					<u-icon name="chat" color="#333" size="24"></u-icon>
-					<view class="badge-box" :class="{'less99': message <= 99 && message >= 10, 'less10': message <10}" v-if="message">
-						<u-badge numberType="overflow" type="error" max="99" :value="message"></u-badge>
-					</view>
-				</view>
-				
-				<view class="right-item" @click="handleScan">
-					<u-icon name="scan" color="#333" size="24"></u-icon>
-				</view>
-				
 				<view class="right-item" @click="handleShowInfo">
 					<u-icon name="setting" color="#333" size="22"></u-icon>
 				</view>
